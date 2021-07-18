@@ -1,10 +1,13 @@
 import React from 'react'
 import { createAppContainer } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
+import { createStackNavigator } from 'react-navigation-stack'
 import { Ionicons } from '@expo/vector-icons'
 
 import ListScreen from './screens/ListScreen'
 import BookmarkScreen from './screens/BookmarkScreen'
+import EditScreen from './screens/EditScreen'
+import { Modal } from 'react-native'
 
 const TabNavigator = createBottomTabNavigator({
     List: {
@@ -20,7 +23,10 @@ const TabNavigator = createBottomTabNavigator({
         screen: () => null,
         navigationOptions: {
             tabBarIcon: ({ tintColor }) => {
-                return <Ionicons name="ios-add-circle" size={36} color='#DA5746' />
+                return <Ionicons name="ios-add-circle" size={29} color='#DA5746' />
+            },
+            tabBarOnPress: ({ navigation }) => {
+                navigation.navigate('Edit')
             }
         }
     },
@@ -42,4 +48,13 @@ const TabNavigator = createBottomTabNavigator({
     } 
 })
 
-export default createAppContainer(TabNavigator)
+const AppNavigator = createStackNavigator({ 
+    Edit: EditScreen,
+    Tab: TabNavigator,
+}, {
+    initialRouteName: 'Tab',
+    mode: 'modal',
+    headerMode: 'none',
+})
+
+export default createAppContainer(AppNavigator )
