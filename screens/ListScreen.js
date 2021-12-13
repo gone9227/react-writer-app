@@ -1,30 +1,26 @@
 import React from 'react'
 import { 
-    Text,
+    FlatList,
     StyleSheet,    
 } from 'react-native'
 import { SafeAreaView } from 'react-navigation'
+import { withContext } from 'react-simplified-context'
 import Header from '../components/Header'
 import ArticleItem from '../components/ArticleItem'
 
-const ListScreen = () => {
+const ListScreen = ({
+    articles,
+}) => {
     return (
         <SafeAreaView style={styles.container}>
             <Header title="나의 글" />
-            <ArticleItem 
-                article={{
-                    id: 1,
-                    title: '시선으로부터',
-                    content: '심시선의 자식들 이야기',
-                    date: '2021년 7월 18일'
+            <FlatList 
+                data={articles}
+                renderItem={({item}) => {
+                    return <ArticleItem article={item} />
                 }}
-            />
-            <ArticleItem 
-                article={{
-                    id: 2,
-                    title: '아무튼, 메모',
-                    content: '메모하길 잘했다',
-                    date: '2021년 7월 16일'
+                keyExtractor={(item) => {
+                    return `${item.id}`
                 }}
             />
         </SafeAreaView>
@@ -37,4 +33,4 @@ const styles = StyleSheet.create({
      },
 })
 
-export default ListScreen
+export default withContext(ListScreen)

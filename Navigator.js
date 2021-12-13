@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons'
 import ListScreen from './screens/ListScreen'
 import BookmarkScreen from './screens/BookmarkScreen'
 import EditScreen from './screens/EditScreen'
+import ViewScreen from './screens/ViewScreen'
 import { Modal } from 'react-native'
 
 const TabNavigator = createBottomTabNavigator({
@@ -50,6 +51,7 @@ const TabNavigator = createBottomTabNavigator({
 
 const AppNavigator = createStackNavigator({ 
     Edit: EditScreen,
+    View: ViewScreen,
     Tab: TabNavigator,
 }, {
     initialRouteName: 'Tab',
